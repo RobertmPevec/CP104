@@ -1,6 +1,6 @@
 """
 ------------------------------------------------------------------------
-Assignment 6, Task 2
+Assignment 6, Task 4
 ------------------------------------------------------------------------
 Author: Robert Pevec
 ID:     169081145
@@ -10,5 +10,5 @@ __updated__ = '2024-03-12'
 """
 
 
-from functions import is_prime_number
-print(is_prime_number(25))
+from functions import count_digits
+print(count_digits(1024))

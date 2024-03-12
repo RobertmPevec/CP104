@@ -5,7 +5,7 @@ Assignment 5, Functions
 Author: Robert Pevec
 ID:     169081145
 Email:  peve1145@mylaurier.ca
-__updated__ = '2024-03-10'
+__updated__ = '2024-03-12'
 ------------------------------------------------------------------------
 """
 from collections import Counter
@@ -118,3 +118,45 @@ Month Interest   Payment   Balance
         print(f"{month:>5} {interest:>8.2f} {payment:>9,.2f} {balance:>9,.2f}")
         month += 1
     return None
+
+
+def count_digits(number):
+    """
+    -------------------------------------------------------
+    Counts the number of digits in an integer.
+    Use: digits = count_digits(number)
+    -------------------------------------------------------
+    Parameters:
+        number - an integer (int)
+    Returns:
+        digits - the number of digits in number (int)
+    ------------------------------------------------------
+    """
+    digits = 1
+    while number >= 10:
+        number /= 10
+        digits += 1
+    return digits
+
+
+def sum_of_factors(number):
+    """
+    -------------------------------------------------------
+    Determines the sum of factors of an integer not including
+    the integer itself. An integer's factors are the whole numbers
+    that the integer can be evenly divided by.
+    Use: total = sum_of_factors(number)
+    -------------------------------------------------------
+    Parameters:
+        number - a positive integer (int >= 1)
+    Returns:
+        total - the total of number's factors (int)
+    ------------------------------------------------------
+    """
+    total = 0
+    n = number - 1
+    while n >= 1:
+        if number % n == 0:
+            total += n
+        n -= 1
+    return total
