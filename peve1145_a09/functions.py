@@ -57,3 +57,97 @@ def extract_integers(file_handle):
             except ValueError:
                 continue
     return number_list
+
+
+def text_stats(file_handle):
+    """
+    -------------------------------------------------------
+    Evaluates the contents of a file by counting upper-case letters,
+    lower-case letters, digits, white-spaces (including end-of-line
+    characters), and remaining characters.
+    Use: ucount, lcount, dcount, wcount, rcount = text_stats(file_handle)
+    -------------------------------------------------------
+    Parameters:
+        file_handle - file to process (file handle - open for reading)
+    Returns:
+        ucount - The number of upper-case letters in the file (int)
+        lcount - The number of lower-case letters in the file (int)
+        dcount - The number of digits in the file (int)
+        wcount - The number of white-space characters in the file (int)
+        rcount - The number of remaining characters in the file (int)
+    -------------------------------------------------------
+    """
+    ucount = 0
+    lcount = 0
+    dcount = 0
+    wcount = 0
+    rcount = 0
+    for n in file_handle:
+        for character in n:
+            if character.isupper():
+                ucount += 1
+            elif character.islower():
+                lcount += 1
+            elif character.isdigit():
+                dcount += 1
+            elif character.isspace():
+                wcount += 1
+            else:
+                rcount += 1
+    return ucount, lcount, dcount, wcount, rcount
+
+
+def add_numbers(fh_read, fh_write):
+    """
+    -------------------------------------------------------
+    Adds line numbers to a file. Contents of fh_write contain contents
+    of fh_read where every line has line numbers added to the beginning
+    of the line in the format [number]. Line numbering starts at 0.
+    Put a single space after the line number.
+    Use: add_numbers(fh_read, fh_write)
+    -------------------------------------------------------
+    Parameters:
+        fh_read - file to read (file - open for reading)
+        fh_write - file to write (file - open for writing)
+    Returns:
+        None
+    -------------------------------------------------------
+    """
+    for index, line in enumerate(fh_read):
+        fh_write.write(f"[{index}] {line}")
+
+
+def student_data(file_handle):
+    """
+    -------------------------------------------------------
+    Get information from a file of file_handle and grades.
+    Use: l_id, h_id, avg = student_data(file_handle)
+    -------------------------------------------------------
+    Parameters:
+        file_handle - student information file in the format
+            surname,forename,id,mark (file - open for reading)
+    Returns:
+        l_id - the id of the student with the lowest mark (str)
+        h_id - the id of the student with the highest mark (str)
+        avg - the average mark (float)
+    -------------------------------------------------------
+    """
+    avg = 0
+    lowest_mark = 101
+    highest_mark = -1
+    l_id = ""
+    h_id = ""
+    total_students = 0
+    for line in file_handle:
+        total_students += 1
+        updated_line = line.strip().split(',')
+        mark = float(updated_line[3])
+        avg += mark
+        if lowest_mark > mark:
+            lowest_mark = mark
+            l_id = updated_line[2]
+        if highest_mark < mark:
+            highest_mark = mark
+            h_id = updated_line[2]
+    avg /= total_students
+    return l_id, h_id, avg
