@@ -67,3 +67,35 @@ def most_frequent_character(string):
     sentence = f"Your most used character is '{most_char}' being used {count} times."
     return sentence
 
+
+def vowel_counter(string):
+    string = string.lower()
+    vowels = {
+        'a': 0, 'e': 0, 'i': 0, 'o': 0, 'u': 0
+    }
+    for char in string:
+        if char in vowels:
+            vowels[char] += 1
+    total_vowels = sum(vowels.values())
+    return vowels, total_vowels
+
+
+def sentence_seperator(string):
+    first_index = 0
+    final_sentence = ""
+    for second_index, char in enumerate(string):
+        if char.isupper() and second_index > 0:
+            final_sentence += string[first_index:second_index] + " "
+            first_index = second_index
+    final_sentence += string[first_index:]
+    return final_sentence
+
+
+def pig_latin(string):
+    # this is for all yall weird mf's that speak pig latin out here
+    final_sentence = ""
+    split_words = string.split(" ")
+    for word in split_words:
+        letter = word[:1]
+        final_sentence += word[1:] + letter + "ay "
+    return final_sentence
